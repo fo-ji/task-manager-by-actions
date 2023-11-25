@@ -2,26 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@layer base {
+  body {
+    @apply text-font text-sm sm:text-base tracking-wide min-h-screen flex flex-col;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  h1 {
+    @apply text-xl sm:text-2xl;
+  }
+
+  h2 {
+    @apply text-lg sm:text-xl;
+  }
+
+  h3, h4, h5, h6 {
+    @apply text-base sm:text-lg;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+@layer components {
+  .text-field {
+    @apply block w-full rounded border-basic-dark placeholder:text-font-light disabled:bg-basic-dark focus:ring-main focus:border-main;
+  }
+
+  .radio-field {
+    @apply text-main border-basic-dark rounded-full focus:outline focus:outline-offset-2 focus:outline-2 focus:outline-main hover:cursor-pointer;
+  }
+
+  .checkbox-field {
+    @apply text-main border-basic-dark rounded focus:outline focus:outline-offset-2 focus:outline-2 focus:outline-main hover:cursor-pointer;
+  }
 }
