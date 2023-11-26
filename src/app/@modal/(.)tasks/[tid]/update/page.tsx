@@ -1,16 +1,22 @@
 import { Modal } from '@/components/modal';
+import { UpdateTaskForm } from '@/features/tasks/components/update-task';
+import prisma from '@/lib/prisma';
 
 type UpdateTaskModalProps = {
   params: { tid: string };
 };
 
-// TODO: fetch get task
+export default async function UpdateTaskModal({
+  params,
+}: UpdateTaskModalProps) {
+  const task = await prisma.task.findUnique({
+    where: { id: params.tid },
+  });
 
-export default function UpdateTaskModal({ params }: UpdateTaskModalProps) {
   return (
     <Modal>
-      {/* <UpdateEventForm eventId={params.eid} /> */}
-      <div>{params.tid}</div>
+      <h1>Update</h1>
+      {task && <UpdateTaskForm task={task} />}
     </Modal>
   );
 }

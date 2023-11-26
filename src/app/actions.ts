@@ -83,13 +83,13 @@ export async function updateTask(
     const parsed = updateTaskSchema.safeParse({
       id: formData.get('id'),
       title: formData.get('title'),
-      completed: formData.get('completed'),
+      completed: formData.get('completed') === 'on',
     });
 
     if (!parsed.success) {
       return {
         errors: parsed.error.flatten().fieldErrors,
-        message: 'Missing Fields. Failed to Create Task',
+        message: 'Missing Fields. Failed to Update Task',
       };
     }
 
@@ -99,10 +99,9 @@ export async function updateTask(
       data,
     });
     revalidatePath('/');
-    redirect('/');
-    // return {
-    //   message: '',
-    // };
+    return {
+      message: '',
+    };
   } catch (e) {
     // if (e instanceof z.ZodError) {
     //   console.log('ZodError: ', e.issues);

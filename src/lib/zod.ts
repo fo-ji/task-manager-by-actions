@@ -11,5 +11,5 @@ export const deleteTaskSchema = z.object({
 export const updateTaskSchema = z.object({
   id: z.string(),
   title: z.string(),
-  completed: z.boolean(),
+  completed: z.boolean().optional(),
 });

@@ -1,14 +1,19 @@
+import { UpdateTaskForm } from '@/features/tasks/components/update-task';
+import prisma from '@/lib/prisma';
+
 type UpdateTaskPageProps = {
   params: { tid: string };
 };
 
-// TODO: fetch get task
+export default async function UpdateTaskPage({ params }: UpdateTaskPageProps) {
+  const task = await prisma.task.findUnique({
+    where: { id: params.tid },
+  });
 
-export default function UpdateTaskPage({ params }: UpdateTaskPageProps) {
   return (
     <div>
-      <h1>UpdateTaskPage</h1>
-      <div>{params.tid}</div>
+      <h1>Update</h1>
+      {task && <UpdateTaskForm task={task} />}
     </div>
   );
 }

@@ -11,9 +11,11 @@ export type CreateTaskState = {
 export type UpdateTaskState = {
   errors?: {
     title?: string[];
+    completed?: string[];
   };
   values?: {
     title?: string;
+    completed?: boolean;
   };
   message: string | null;
 };
