@@ -10,7 +10,7 @@ import {
   updateTaskSchema,
 } from '@/lib/zod';
 import { CreateTaskState, UpdateTaskState } from '@/features/tasks/types';
-import { redirect } from 'next/navigation';
+// import { redirect } from 'next/navigation';
 
 // TODO: 全体的に改修
 
@@ -43,6 +43,7 @@ export async function createTask(
         },
       },
     });
+    // revalidatePath('/api/tasks');
     revalidatePath('/');
     return {
       message: '',
@@ -66,7 +67,8 @@ export async function deleteTask(prevState: any, formData: FormData) {
     await prisma.task.delete({
       where: { id: parsed.id },
     });
-    return revalidatePath('/');
+    // revalidatePath('/api/tasks');
+    revalidatePath('/');
   } catch (e) {
     if (e instanceof z.ZodError) {
       console.log('ZodError: ', e.issues);
@@ -98,6 +100,7 @@ export async function updateTask(
       where: { id },
       data,
     });
+    // revalidatePath('/api/tasks');
     revalidatePath('/');
     return {
       message: '',

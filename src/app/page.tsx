@@ -1,11 +1,18 @@
 import { CreateTaskForm, TasksList } from '@/features/tasks';
-import prisma from '@/lib/prisma';
+// import prisma from '@/lib/prisma';
 
 export default async function Home() {
-  const tasks = await prisma.task.findMany({
-    where: { userId: 'clpdfqawj000014ocbrzn4yho' },
-    orderBy: { createdAt: 'asc' },
+  // const tasks = await prisma.task.findMany({
+  //   where: { userId: 'clpdfqawj000014ocbrzn4yho' },
+  //   orderBy: { createdAt: 'asc' },
+  // });
+  const res = await fetch('http://host.docker.internal:3000/api/tasks', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    // cache: 'no-store',
   });
+  const tasks = await res.json();
 
   return (
     <section className="w-full p-6">
